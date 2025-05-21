@@ -37,7 +37,7 @@ jobs:
                   .\innosetup\ISCC.exe installer\coffee_break.iss
 
             - name: Upload installer artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v2
               with:
                 name: CoffeeBreakInstaller
                 path: output\CoffeeBreakInstaller.exe
