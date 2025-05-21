@@ -40,4 +40,4 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                 name: CoffeeBreakInstaller
-                path: output/CoffeeBreakInstaller.exe
+                path: output\CoffeeBreakInstaller.exe
