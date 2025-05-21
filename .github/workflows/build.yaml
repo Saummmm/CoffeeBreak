@@ -1,0 +1,39 @@
+name: Build and Package Coffee Break
+
+on:
+    push:
+        branches:
+            - master
+        tags:
+            - 'v*.*.*'
+
+
+jobs:
+    build:
+        runs-on: windows-latest
+        
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v3
+              with:
+                    dotnet-version: '6.0.x'
+        
+            - name: Restore
+              run: dotnet restore
+
+            - name: Build and publish app
+              run: dotnet publish CoffeeBreak.csproj -c Release -r win-x64 --self-contained false
+
+            - name: Package installer
+              uses: Minionguyjpro/InnoSetup-Action@v1.1
+              with:
+                path: installer/coffee_break.iss
+
+            - name: Upload installer artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: CoffeeBreakInstaller
+                path: output/CoffeeBreakInstaller.exe
